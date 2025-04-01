@@ -1,13 +1,12 @@
 <?php
-
 namespace Controllers;
 
 use Utils\View;
 
-class HomeController{
+class AboutController{
 
   public static function index(){
-    View::load("home");
+    View::load("about");
   }
-
+  
 }
