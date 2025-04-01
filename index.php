@@ -10,6 +10,11 @@ Autoloader::register();
 $router = new Router();
 $router->register("/", "Controllers\HomeController::index");
 $router->register("/about", "Controllers\AboutController::index");
+$router->register("/user/inscription", "Controllers\UserController::inscription");
+$router->register("/user/add", "Controllers\UserController::add");
+$router->register("/user/connexion", "Controllers\UserController::connexion");
+$router->register("/user/connect", "Controllers\UserController::connect");
+$router->register("/user/profile", "Controllers\UserController::profile");
 
 try{
   $router->resolve($_SERVER["REQUEST_URI"]);
