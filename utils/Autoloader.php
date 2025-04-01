@@ -23,10 +23,6 @@ class Autoloader{
           require_once "{$type}/{$class}.php";
         }
       }
-
-      if(file_exists("controllers/{$class}.php")){
-        require_once "controllers/{$class}.php";
-      }
     });
   }
 
