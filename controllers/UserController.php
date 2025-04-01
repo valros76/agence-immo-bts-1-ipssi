@@ -9,10 +9,11 @@ class UserController{
     View::load("inscription");
   }
 
-  public function add(){
+  public static function add(){
     /**
      * TODO : Add user into BDD
      */
+    var_dump($_POST);
   }
 
   public static function connexion(){
@@ -20,6 +21,11 @@ class UserController{
   }
 
   public static function connect(){
+    header("Location:/user/profile");
+    exit;
+  }
+
+  public static function profile(){
     View::load("profile");
   }
 

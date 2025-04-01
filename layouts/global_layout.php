@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?= $mainTitle ?? "Agence immo" ?></title>
   <meta name="description" content="Agence immobilière - Projet d'entraînement PHP">
-  <link rel="stylesheet" href="sources/css/init.css?v=<?= filemtime("sources/css/init.css") ?>">
+  <link rel="stylesheet" href="/sources/css/init.css?v=<?= filemtime("sources/css/init.css") ?>">
 </head>
 <body>
   <header class="main-head">
