@@ -1,6 +1,8 @@
 <?php
 
+use Utils\Autoloader;
+
 require_once "utils/Autoloader.php";
 Autoloader::register();
 
-HomeController::index();
+Controllers\HomeController::index();

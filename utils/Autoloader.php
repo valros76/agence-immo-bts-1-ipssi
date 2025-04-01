@@ -10,6 +10,7 @@ class Autoloader{
 
       $dirs = [
         "Controllers",
+        "Exceptions",
         "Models",
         "Utils"
       ];
