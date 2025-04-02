@@ -12,13 +12,17 @@ class UserController{
   }
 
   public static function add(){
-    /**
-     * TODO : Add user into BDD
-     */
-    var_dump($_POST);
     $user = new User(BDD::connect());
-    var_dump($user);
+    $pseudo = isset($_POST["pseudo"]) ? $_POST["pseudo"] : null;
+    $password = isset($_POST["password"]) ? $_POST["password"] : null; 
 
+    if (!$pseudo || !$password) {
+      header("Location:/user/inscription");
+      exit;
+    };
+
+    $user->initialize($pseudo, $password);
+    var_dump($user);
   }
 
   public static function connexion(){

@@ -9,11 +9,11 @@ class BDD{
 
   public static function connect(){
     try{
-      $configFile = file_get_contents("/config/config.json");
+      $configFile = file_get_contents("config/config.json");
       $config = json_decode($configFile)->database;
       
       if(!self::$bdd){
-        self::$bdd = new PDO("mysql:host={$config->host};dbname={$config->dbname};charset=utf-8;", $config->username, $config->password, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+        self::$bdd = new PDO("mysql:host={$config->host};dbname={$config->dbname};charset=utf8mb4;", $config->username, $config->password, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
       }
   
       return self::$bdd;
