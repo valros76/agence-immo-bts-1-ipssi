@@ -1,6 +1,7 @@
 <?php
 namespace Controllers;
 
+use Exception;
 use Utils\BDD;
 use Utils\View;
 use Models\User;
@@ -21,8 +22,22 @@ class UserController{
       exit;
     };
 
-    $user->initialize($pseudo, $password);
-    var_dump($user);
+    try{
+      $user->initialize($pseudo, $password);
+      $pseudo = null;
+      $password = null;
+  
+      if(!$user->add()){
+        header("Location:/user/inscription");
+        exit;
+      }
+  
+      header("Location:/user/connexion");
+      exit;
+    }catch(Exception $e){
+      header("Location:/user/inscription");
+      exit;
+    }
   }
 
   public static function connexion(){
