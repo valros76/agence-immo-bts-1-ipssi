@@ -1,7 +1,9 @@
 <?php
 namespace Controllers;
 
+use Utils\BDD;
 use Utils\View;
+use Models\User;
 
 class UserController{
 
@@ -14,6 +16,9 @@ class UserController{
      * TODO : Add user into BDD
      */
     var_dump($_POST);
+    $user = new User(BDD::connect());
+    var_dump($user);
+
   }
 
   public static function connexion(){
