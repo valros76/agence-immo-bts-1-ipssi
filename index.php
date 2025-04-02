@@ -1,5 +1,9 @@
 <?php
 
+if(session_status() === PHP_SESSION_NONE){
+  session_start();
+}
+
 use Exceptions\RouteNotFoundException;
 use Utils\Router;
 use Utils\Autoloader;

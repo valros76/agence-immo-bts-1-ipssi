@@ -45,11 +45,40 @@ class UserController{
   }
 
   public static function connect(){
+    $pseudo = isset($_POST["pseudo"]) ? $_POST["pseudo"] : null;
+    $password = isset($_POST["password"]) ? $_POST["password"] : null;
+
+    if (!$pseudo || !$password) {
+      header("Location:/user/connexion");
+      exit;
+    }
+
+    $user = new User(BDD::connect());
+    if(!$user->verifyLogs($pseudo, $password)){
+      header("Location:/user/connexion");
+      exit;
+    }
+
+    $_SESSION["user_pseudo"] = $pseudo;  
+
     header("Location:/user/profile");
     exit;
   }
 
   public static function profile(){
+
+    if(isset($_SESSION["user_pseudo"])){
+      echo $_SESSION["user_pseudo"];
+    }
+
+    $user = (object) [
+      "id" => null,
+      "pseudo" => isset($_SESSION["user_pseudo"]) ? $_SESSION["user_pseudo"] : null,
+      "inscription_date" => null
+    ];
+
+    $userManager = new User(BDD::connect());
+
     View::load("profile");
   }
 

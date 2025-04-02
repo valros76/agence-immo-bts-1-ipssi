@@ -68,6 +68,54 @@ class User{
     return $req->execute();
   }
 
+  public static function verifyLogs(string $pseudo, string $password): bool{
+      $req = self::$bdd->prepare("SELECT * FROM users WHERE pseudo=:pseudo");
+      $req->bindValue(":pseudo", $pseudo, PDO::PARAM_STR);
+      $req->execute();
+      $user = $req->fetch(PDO::FETCH_OBJ);
+
+      if (!$user) return false;
+
+      return password_verify($password, $user->password);
+  }
+
+  public function getAll(){
+    $req = self::$bdd->prepare("SELECT * FROM users");
+    $req->execute();
+    $users = $req->fetchAll(PDO::FETCH_OBJ);
+    $req->closeCursor();
+
+    return $users ?? null;
+  }
+
+  public function getById(){
+    if(!$this->getId()){
+      return null;
+    }
+
+    $req = self::$bdd->prepare("SELECT * FROM users WHERE id=:id");
+    $req->bindValue(":id", $this->getId(), PDO::PARAM_INT);
+    $req->execute();
+    $user = $req->fetch(PDO::FETCH_OBJ);
+    $req->closeCursor();
+
+    return $user ?? null;
+  }
+
+  public function getByPseudo(){
+    if(!$this->getPseudo()){
+      return null;
+    }
+
+    $req = self::$bdd->prepare("SELECT id, pseudo, inscription_date FROM users WHERE pseudo=:pseudo");
+    $req->bindValue(":pseudo", $this->getPseudo(), PDO::PARAM_STR);
+    $req->execute();
+    $user = $req->fetch(PDO::FETCH_OBJ);
+    $req->closeCursor();
+
+    return $user ?? null;
+  }
+
 
   private static function setBdd($bdd){
     self::$bdd = $bdd;
