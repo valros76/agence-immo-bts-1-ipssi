@@ -88,4 +88,76 @@ class UserController{
     ]);
   }
 
+  public static function update(){
+    $user = (object) [
+      "id" => isset($_POST["id"]) ? (int) $_POST["id"] : null,
+      "pseudo" => isset($_POST["pseudo"]) ? $_POST["pseudo"] : null,
+      "password" => isset($_POST["password"]) ? $_POST["password"] : null
+    ];
+
+    if(!$user->id || !$user->pseudo || !$user->password){
+      $_SESSION["error"] = "Il manque des données pour la mise à jour du profil.";
+      header("Location:/user/profile");
+      exit;
+    }
+
+    $userManager = new User(BDD::connect());
+    $userManager->initialize(
+      id: $user->id,
+      pseudo: $user->pseudo,
+      password: $user->password
+    );
+    $user = null;
+
+    if(!$userManager->update()){
+      $_SESSION["error"] = "La mise a jour des données a échoué.";
+    }
+
+    $_SESSION["user_pseudo"] = $userManager->getPseudo();
+    header("Location:/user/profile");
+    exit;
+  }
+
+  public static function updatePseudo(){
+    $user = (object) [
+      "id" => isset($_POST["id"]) ? (int) $_POST["id"] : null,
+      "pseudo" => isset($_POST["pseudo"]) ? $_POST["pseudo"] : null
+    ];
+
+    if(!$user->id || !$user->pseudo){
+      $_SESSION["error"] = "Il manque des données pour la mise à jour du pseudo.";
+      header("Location:/user/profile");
+      exit;
+    }
+
+    $userManager = new User(BDD::connect());
+    $userManager->initialize(
+      id: $user->id,
+      pseudo: $user->pseudo,
+    );
+    $user = null;
+
+    if(!$userManager->update()){
+      $_SESSION["error"] = "La mise a jour du pseudo a échoué.";
+    }
+
+    $_SESSION["user_pseudo"] = $userManager->getPseudo();
+    header("Location:/user/profile");
+    exit;
+  }
+
+  public static function disconnect(){
+    /**
+     * On pourrait également supprimer les valeurs unitairement : 
+     * unset($_SESSION["user_id"])
+     * unset($_SESSION["user_pseudo"])
+     * unset($_SESSION["user_inscription_date"])
+     * unset($_SESSION["error"])
+     */
+    $_SESSION = [];
+    
+    header("Location:/user/connexion");
+    exit;
+  }
+
 }

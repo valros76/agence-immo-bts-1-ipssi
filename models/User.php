@@ -139,6 +139,26 @@ class User
     return $user ?? null;
   }
 
+  public function update(){
+    if (!$this->getId() || !$this->getPseudo() || !$this->getPassword()) return false;
+
+    $req = self::$bdd->prepare("UPDATE users SET pseudo=:pseudo, password=:password WHERE id=:id");
+    $req->bindValue(":id", $this->getId(), PDO::PARAM_INT);
+    $req->bindValue(":pseudo", $this->getPseudo(), PDO::PARAM_STR);
+    $req->bindValue(":password", $this->getPassword(), PDO::PARAM_STR);
+
+    return $req->execute();
+  }
+
+  public function updatePseudo(){
+    if (!$this->getId() || !$this->getPseudo()) return false;
+
+    $req = self::$bdd->prepare("UPDATE users SET pseudo=:pseudo WHERE id=:id");
+    $req->bindValue(":id", $this->getId(), PDO::PARAM_INT);
+    $req->bindValue(":pseudo", $this->getPseudo(), PDO::PARAM_STR);
+
+    return $req->execute();
+  }
 
   private static function setBdd($bdd)
   {

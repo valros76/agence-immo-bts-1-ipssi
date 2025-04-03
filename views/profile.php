@@ -15,6 +15,23 @@ ob_start();
       Inscrit depuis le <?= $user->inscription_date ?>
     </p>
 
+    <?php 
+      if(isset($_SESSION["error"])):
+    ?>
+    <aside class="error-banner">
+      <header>
+        <p><strong>Erreur</strong></p>
+      </header>
+      <p><?= $_SESSION["error"] ?? null ?></p>
+      <footer>
+        <p><small>Gravité : Moyenne</small></p>
+      </footer>
+    </aside>
+    <?php 
+      unset($_SESSION["error"]);
+      endif;
+    ?>
+
     <details>
       <summary>
         Modifier toutes les informations du profil
@@ -24,7 +41,7 @@ ob_start();
         <label for="pseudo">
           Pseudo
         </label>
-        <input type="text" value="<?= $user->pseudo ?>" name="pseudo" id="pseudo" required />
+        <input type="text" value="<?= $user->pseudo ?>" name="pseudo" id="pseudo"  />
 
         <label for="password">
           Mot de passe

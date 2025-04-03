@@ -19,6 +19,9 @@ $router->register("/user/add", "Controllers\UserController::add");
 $router->register("/user/connexion", "Controllers\UserController::connexion");
 $router->register("/user/connect", "Controllers\UserController::connect");
 $router->register("/user/profile", "Controllers\UserController::profile");
+$router->register("/user/modify", "Controllers\UserController::update");
+$router->register("/user/modify/pseudo", "Controllers\UserController::updatePseudo");
+$router->register("/user/disconnect", "Controllers\UserController::disconnect");
 
 try{
   $router->resolve($_SERVER["REQUEST_URI"]);
