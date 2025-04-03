@@ -16,10 +16,17 @@ class View
   public static function load(
     string $filename,
     string $ext = "php",
-    string $layout = Layout::DEFAULT->value
+    string $layout = Layout::DEFAULT->value,
+    object ...$params
   ) {
     if (!file_exists("views/{$filename}.{$ext}")) {
       throw new RouteNotFoundException();
+    }
+
+    foreach($params as $list){
+      foreach($list as $var=>$value){
+        ${$var} = $value;
+      }
     }
 
     require_once "views/{$filename}.{$ext}";

@@ -64,6 +64,7 @@ class UserController{
     if(!$userDatas){
       throw new Exception("Un problème s'est produit lors de la récupération de vos données.");
     }
+
     $_SESSION["user_id"] = $userDatas->id;
     $_SESSION["user_pseudo"] = $userDatas->pseudo;
     $_SESSION["user_inscription_date"] = $userDatas->inscription_date;
@@ -74,27 +75,17 @@ class UserController{
 
   public static function profile(){
 
-    if(isset($_SESSION["user_id"])){
-      echo $_SESSION["user_id"];
-    }
-
-    if(isset($_SESSION["user_pseudo"])){
-      echo $_SESSION["user_pseudo"];
-    }
-
-    if(isset($_SESSION["user_inscription_date"])){
-      echo $_SESSION["user_inscription_date"];
-    }
-
     $user = (object) [
-      "id" => null,
+      "id" => isset($_SESSION["user_id"]) ? $_SESSION["user_id"] : null,
       "pseudo" => isset($_SESSION["user_pseudo"]) ? $_SESSION["user_pseudo"] : null,
-      "inscription_date" => null
-    ];
+      "inscription_date" => isset($_SESSION["user_inscription_date"]) ? $_SESSION["user_inscription_date"] : null
+    ];  
 
     $userManager = new User(BDD::connect());
 
-    View::load("profile");
+    View::load("profile", params: (object) [
+      "user" => $user
+    ]);
   }
 
 }
