@@ -59,7 +59,13 @@ class UserController{
       exit;
     }
 
-    $_SESSION["user_pseudo"] = $pseudo;  
+    $userDatas = $user->getByPseudo($pseudo);
+    if(!$userDatas){
+      throw new Exception("Un problème s'est produit lors de la récupération de vos données.");
+    }
+    $_SESSION["user_id"] = $userDatas->id;
+    $_SESSION["user_pseudo"] = $userDatas->pseudo;
+    $_SESSION["user_inscription_date"] = $userDatas->inscription_date;
 
     header("Location:/user/profile");
     exit;
