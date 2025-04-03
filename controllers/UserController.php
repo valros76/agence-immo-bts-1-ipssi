@@ -155,7 +155,9 @@ class UserController{
 
   public static function delete(){
     $id = isset($_POST["id"]) ? (int) $_POST["id"] : null;
+    
     if(!$id) {
+      $_SESSION["error"] = "Votre compte n'a pas pu être authentifié pour la demande de suppression.";
       header("/user/profile");
       exit;
     }
@@ -163,9 +165,11 @@ class UserController{
     $userManager = new User(BDD::connect());
     $userManager->initialize(id: $id);
 
-    /**
-     * TODO : Supprimer le compte de l'utilisateur en BDD
-     */
+    if(!$userManager->deleteById()){
+      $_SESSION["error"] = "La suppression de l'utilisateur a échouée.";
+      header("Location:/user/profile");
+      exit;
+    }
 
      session_unset();
      header("Location:/user/inscription");
