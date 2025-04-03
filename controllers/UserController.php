@@ -147,17 +147,29 @@ class UserController{
   }
 
   public static function disconnect(){
-    /**
-     * On pourrait également supprimer les valeurs unitairement : 
-     * unset($_SESSION["user_id"])
-     * unset($_SESSION["user_pseudo"])
-     * unset($_SESSION["user_inscription_date"])
-     * unset($_SESSION["error"])
-     */
-    $_SESSION = [];
-    
+    session_unset();
+
     header("Location:/user/connexion");
     exit;
+  }
+
+  public static function delete(){
+    $id = isset($_POST["id"]) ? (int) $_POST["id"] : null;
+    if(!$id) {
+      header("/user/profile");
+      exit;
+    }
+
+    $userManager = new User(BDD::connect());
+    $userManager->initialize(id: $id);
+
+    /**
+     * TODO : Supprimer le compte de l'utilisateur en BDD
+     */
+
+     session_unset();
+     header("Location:/user/inscription");
+     exit;
   }
 
 }

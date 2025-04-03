@@ -160,6 +160,12 @@ class User
     return $req->execute();
   }
 
+  public function deleteById(){
+    if(!$this->getId()) return false;
+    $id = $this->getId();
+    return self::$bdd->exec("DELETE FROM users WHERE id={$id}");
+  }
+
   private static function setBdd($bdd)
   {
     self::$bdd = $bdd;

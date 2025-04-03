@@ -1,4 +1,8 @@
 <?php
+if(!isset($_SESSION["user_id"])){
+  header("Location:/user/connexion");
+  exit;
+}
 $mainTitle = "Profil - PHP Immo";
 $pageTitle = "Profil";
 ob_start();
@@ -73,6 +77,14 @@ ob_start();
         </button>
       </form>
     </details>
+
+    <form action="/user/delete" method="POST">
+      <input type="hidden" value="<?= $user->id ?>" name="id" required/>
+      <button type="submit">
+        Supprimer le compte
+      </button>
+    </form>
+    
   </article>
 </section>
 <?php

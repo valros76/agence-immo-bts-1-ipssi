@@ -22,6 +22,7 @@ $router->register("/user/profile", "Controllers\UserController::profile");
 $router->register("/user/modify", "Controllers\UserController::update");
 $router->register("/user/modify/pseudo", "Controllers\UserController::updatePseudo");
 $router->register("/user/disconnect", "Controllers\UserController::disconnect");
+$router->register("/user/delete", "Controllers\UserController::delete");
 
 try{
   $router->resolve($_SERVER["REQUEST_URI"]);
