@@ -23,7 +23,7 @@ class UserController{
     };
 
     try{
-      $user->initialize($pseudo, $password);
+      $user->initialize(pseudo: $pseudo, password: $password);
       $pseudo = null;
       $password = null;
   
@@ -59,6 +59,7 @@ class UserController{
       exit;
     }
 
+    $user->initialize(pseudo: $pseudo);
     $userDatas = $user->getByPseudo($pseudo);
     if(!$userDatas){
       throw new Exception("Un problème s'est produit lors de la récupération de vos données.");
@@ -73,8 +74,16 @@ class UserController{
 
   public static function profile(){
 
+    if(isset($_SESSION["user_id"])){
+      echo $_SESSION["user_id"];
+    }
+
     if(isset($_SESSION["user_pseudo"])){
       echo $_SESSION["user_pseudo"];
+    }
+
+    if(isset($_SESSION["user_inscription_date"])){
+      echo $_SESSION["user_inscription_date"];
     }
 
     $user = (object) [
