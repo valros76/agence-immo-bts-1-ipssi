@@ -1,23 +1,34 @@
 <?php
 $mainContent = "Acceuil - Agence Immo";
-$pageTitle = "Accueil";
+$pageTitle = "Accueil Cassino Royal";
 ob_start();
 ?>
 
 <section class="main-sections">
-  <h2 class="main-sections-title">
-    Hello world !
-  </h2>
+  <h1 class="main-sections-title">
+    CASSINO ROYAL
+  </h1>
 
-  <article class="main-articles">
-    <h2 class="main-articles-title">
-      Lorem
-    </h2>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium facilis labore iure. Explicabo qui fugiat modi corrupti harum error cupiditate.
-    </p>
+  <article class="container">
+    <div class="slot-container">
+      <h2 class="main-articles-center">
+        🤑BIG WIN🤑 SLOT MACHINE
+      </h2>
+      <h3>
+        GET A BIG WIN 
+      </h3>
+      <article class="slot-machine"> 
+        <div class="reel" id="reel1">🍒</div> 
+        <div class="reel" id="reel2">🍒</div> 
+        <div class="reel" id="reel3">🍒</div> 
+      </article> 
+      <button id="spinButton">SPIN</button>
+      <input type="text" id="mise" placeholder="Mise" value="10">
+      <div id="result"></div>
+    </div>
+    <img src="/sources/img/Gamble-motivation.jpg" alt="Gamble-motivation-img" class="Gamble-motivation-img">
   </article>
 </section>
-
+<script src="/sources/js/SlotScrip.js"></script>
 <?php
 $mainContent = ob_get_clean();
