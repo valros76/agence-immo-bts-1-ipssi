@@ -1,12 +1,12 @@
 <?php
 $mainContent = "Acceuil - Agence Immo";
-$pageTitle = "Accueil Cassino Royal";
+$pageTitle = "Accueil Casino Royal";
 ob_start();
 ?>
 
 <section class="main-sections">
   <h1 class="main-sections-title">
-    CASSINO ROYAL
+    CASINO ROYAL
   </h1>
 
   <article class="container">
